@@ -4,12 +4,14 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5c4584b-287f-4cef-aea7-0ae973b04d66" name="Changes" comment="Добавлены автотесты CRUD продуктов">
-      <change afterPath="$PROJECT_DIR$/tests/api/conftest.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/api/test_get_requests.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/api/test_products_filters.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/api/test_reviews.py" afterDir="false" />
+    <list default="true" id="f5c4584b-287f-4cef-aea7-0ae973b04d66" name="Changes" comment="Подкорректированы тесты post/put. Также добавлены необходимые __init__.py">
+      <change afterPath="$PROJECT_DIR$/tests/api/categories/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/api/categories/test_categories_get.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/api/reviews/__init__.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/api/reviews/test_reviews_get.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/api/reviews/test_reviews_post.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/api/test_get_requests.py" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -52,10 +54,35 @@
     "Python tests.Python tests in api.executor": "Run",
     "Python tests.Python tests in test_auth.py.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "master"
+    "git-widget-placeholder": "master",
+    "last_opened_file_path": "C:/Users/PC/PycharmProjects/E-commerce-Store-Test/config"
   }
 }]]></component>
+  <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="C:\Users\PC\PycharmProjects\E-commerce-Store-Test\config" />
+      <recent name="C:\Users\PC\PycharmProjects\E-commerce-Store-Test\src" />
+      <recent name="C:\Users\PC\PycharmProjects\E-commerce-Store-Test\src\api" />
+      <recent name="C:\Users\PC\PycharmProjects\E-commerce-Store-Test\tests" />
+      <recent name="C:\Users\PC\PycharmProjects\E-commerce-Store-Test\tests\api" />
+    </key>
+  </component>
   <component name="RunManager" selected="Python tests.Python tests in api">
+    <configuration name="Python tests in C:/Users/PC/PycharmProjects/E-commerce-Store-Test/tests/api/test_auth.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="E-commerce-Store-Test" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/api" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/api/test_auth.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
     <configuration name="Python tests in api" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="E-commerce-Store-Test" />
       <option name="ENV_FILES" value="" />
@@ -71,25 +98,10 @@
       <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
-    <configuration name="Python tests in test_auth.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
-      <module name="E-commerce-Store-Test" />
-      <option name="ENV_FILES" value="" />
-      <option name="INTERPRETER_OPTIONS" value="" />
-      <option name="PARENT_ENVS" value="true" />
-      <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/api" />
-      <option name="IS_MODULE_SDK" value="true" />
-      <option name="ADD_CONTENT_ROOTS" value="true" />
-      <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="_new_additionalArguments" value="&quot;&quot;" />
-      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/api/test_auth.py&quot;" />
-      <option name="_new_targetType" value="&quot;PATH&quot;" />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="Python tests.Python tests in api" />
-        <item itemvalue="Python tests.Python tests in test_auth.py" />
+        <item itemvalue="Python tests.Python tests in C:/Users/PC/PycharmProjects/E-commerce-Store-Test/tests/api/test_auth.py" />
       </list>
     </recent_temporary>
   </component>
@@ -125,12 +137,30 @@
       <option name="project" value="LOCAL" />
       <updated>1761211832087</updated>
     </task>
-    <option name="localTasksCounter" value="3" />
+    <task id="LOCAL-00003" summary="Подкорректирована структура тестов CRUD продуктов">
+      <option name="closed" value="true" />
+      <created>1761212375133</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1761212375133</updated>
+    </task>
+    <task id="LOCAL-00004" summary="Подкорректированы тесты post/put. Также добавлены необходимые __init__.py">
+      <option name="closed" value="true" />
+      <created>1761213334533</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1761213334533</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="Добавлены автотесты для авторизации и получению продуктов по токену" />
     <MESSAGE value="Добавлены автотесты CRUD продуктов" />
-    <option name="LAST_COMMIT_MESSAGE" value="Добавлены автотесты CRUD продуктов" />
+    <MESSAGE value="Подкорректирована структура тестов CRUD продуктов" />
+    <MESSAGE value="Подкорректированы тесты post/put. Также добавлены необходимые __init__.py" />
+    <option name="LAST_COMMIT_MESSAGE" value="Подкорректированы тесты post/put. Также добавлены необходимые __init__.py" />
   </component>
 </project>
