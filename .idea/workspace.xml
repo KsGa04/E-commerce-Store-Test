@@ -4,19 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5c4584b-287f-4cef-aea7-0ae973b04d66" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/E-commerce-Store-Test.iml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/profiles_settings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/config/environment.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pytest.ini" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/api/client.py" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/tests/api/test_auth.py" afterDir="false" />
+    <list default="true" id="f5c4584b-287f-4cef-aea7-0ae973b04d66" name="Changes" comment="Добавлены автотесты CRUD продуктов">
+      <change afterPath="$PROJECT_DIR$/tests/api/conftest.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/api/test_get_requests.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/api/test_products_filters.py" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tests/api/test_reviews.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,6 +26,18 @@
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
+  <component name="GitHubPullRequestSearchHistory"><![CDATA[{
+  "lastFilter": {
+    "state": "OPEN",
+    "assignee": "KsGa04"
+  }
+}]]></component>
+  <component name="GithubPullRequestsUISettings"><![CDATA[{
+  "selectedUrlAndAccountId": {
+    "url": "https://github.com/KsGa04/E-commerce-Store-Test.git",
+    "accountId": "8ba9f433-10e2-46b8-b34a-8dcdf68ff07f"
+  }
+}]]></component>
   <component name="ProjectColorInfo"><![CDATA[{
   "associatedIndex": 4
 }]]></component>
@@ -44,12 +49,28 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Python tests.Python tests in api.executor": "Run",
     "Python tests.Python tests in test_auth.py.executor": "Run",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "master"
   }
 }]]></component>
-  <component name="RunManager">
+  <component name="RunManager" selected="Python tests.Python tests in api">
+    <configuration name="Python tests in api" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
+      <module name="E-commerce-Store-Test" />
+      <option name="ENV_FILES" value="" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests/api" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/api&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
+      <method v="2" />
+    </configuration>
     <configuration name="Python tests in test_auth.py" type="tests" factoryName="Autodetect" temporary="true" nameIsGenerated="true">
       <module name="E-commerce-Store-Test" />
       <option name="ENV_FILES" value="" />
@@ -67,6 +88,7 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.Python tests in api" />
         <item itemvalue="Python tests.Python tests in test_auth.py" />
       </list>
     </recent_temporary>
@@ -87,6 +109,28 @@
       <option name="presentableId" value="Default" />
       <updated>1761206393159</updated>
     </task>
+    <task id="LOCAL-00001" summary="Добавлены автотесты для авторизации и получению продуктов по токену">
+      <option name="closed" value="true" />
+      <created>1761209248171</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1761209248171</updated>
+    </task>
+    <task id="LOCAL-00002" summary="Добавлены автотесты CRUD продуктов">
+      <option name="closed" value="true" />
+      <created>1761211832087</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1761211832087</updated>
+    </task>
+    <option name="localTasksCounter" value="3" />
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="Добавлены автотесты для авторизации и получению продуктов по токену" />
+    <MESSAGE value="Добавлены автотесты CRUD продуктов" />
+    <option name="LAST_COMMIT_MESSAGE" value="Добавлены автотесты CRUD продуктов" />
   </component>
 </project>

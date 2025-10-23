@@ -1,0 +1,60 @@
+import pytest
+from src.api.client import ApiClient
+from config.environment import Environment
+
+
+@pytest.fixture
+def api_client():
+    """Базовый неавторизованный клиент"""
+    return ApiClient()
+
+
+@pytest.fixture
+def auth_client():
+    """Авторизованный клиент"""
+    client = ApiClient()
+    client.login(
+        Environment.TEST_USER["username"],
+        Environment.TEST_USER["password"]
+    )
+    return client
+
+
+@pytest.fixture
+def sample_product():
+    """Тестовые данные товара"""
+    return {
+        "name": "Test Gaming Keyboard",
+        "description": "Mechanical gaming keyboard with RGB",
+        "price": 129.99,
+        "category": "Electronics",
+        "stock": 25,
+        "imageUrl": "/keyboard.png"
+    }
+
+
+@pytest.fixture
+def sample_review():
+    """Тестовые данные отзыва"""
+    return {
+        "rating": 5,
+        "comment": "Excellent product! Highly recommended!",
+        "author": "Test User"
+    }
+
+
+def extract_product_id(create_response, product_name, auth_client):
+    """Вспомогательная функция для извлечения ID созданного товара"""
+    data = create_response.json()
+
+    if "product" in data:
+        return data["product"]["id"]
+    elif "id" in data:
+        return data["id"]
+    else:
+        # Если ID нет в ответе, ищем товар по имени в списке
+        products_response = auth_client.get_products()
+        products_data = products_response.json()
+        our_product = next((p for p in products_data["products"] if p["name"] == product_name), None)
+        assert our_product is not None, f"Товар с именем '{product_name}' не найден в списке"
+        return our_product["id"]
