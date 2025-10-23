@@ -18,7 +18,6 @@ class TestProductsDelete:
         assert "message" in data
         assert "product" in data
 
-        # Проверяем, что товар удален
         get_response = auth_client.get_product(product_id)
         assert get_response.status_code == 404
 

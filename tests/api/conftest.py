@@ -14,8 +14,14 @@ from config.environment import Environment
 
 def generate_unique_product_name():
     """Генерация уникального имени товара"""
-    random_suffix = ''.join(random.choices(string.ascii_lowercase + string.digits, k=6))
+    random_suffix = ''.join(random.choices(string.ascii_lowercase + string.digits, k=8))
     return f"Test Product {random_suffix}"
+
+
+def generate_unique_username():
+    """Генерация уникального имени пользователя"""
+    random_suffix = ''.join(random.choices(string.ascii_lowercase + string.digits, k=8))
+    return f"testuser_{random_suffix}"
 
 
 @pytest.fixture

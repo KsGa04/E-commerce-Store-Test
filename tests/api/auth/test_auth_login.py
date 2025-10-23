@@ -30,3 +30,18 @@ class TestAuthLogin:
         """POST /auth/login - отсутствуют учетные данные"""
         response = api_client.login("", "")
         assert response.status_code == 400
+
+    def test_login_missing_password(self, api_client):
+        """POST /auth/login - отсутствует пароль"""
+        response = api_client.login("admin", "")
+        assert response.status_code == 400
+
+    def test_login_missing_username(self, api_client):
+        """POST /auth/login - отсутствует имя пользователя"""
+        response = api_client.login("", "admin123")
+        assert response.status_code == 400
+
+    def test_login_sql_injection_attempt(self, api_client):
+        """POST /auth/login - попытка SQL инъекции"""
+        response = api_client.login("admin' OR '1'='1", "password")
+        assert response.status_code == 401

@@ -23,13 +23,11 @@ class TestProductsPost:
         assert response.status_code == 201
 
         data = response.json()
-        print("CREATE RESPONSE:", data)  # Для отладки
+        print("CREATE RESPONSE:", data)
 
-        # Проверяем различные возможные структуры ответа
         if "product" in data:
             created_product = data["product"]
         elif "message" in data:
-            # Если возвращается сообщение, проверяем через список товаров
             products_response = auth_client.get_products()
             products_data = products_response.json()
             our_product = next((p for p in products_data["products"] if p["name"] == unique_product["name"]), None)

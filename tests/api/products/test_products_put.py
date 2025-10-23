@@ -32,7 +32,7 @@ class TestProductsPut:
         }
 
         response = auth_client.update_product(product_id, update_data, method="PUT")
-        print("PUT RESPONSE:", response.json())  # Для отладки
+        print("PUT RESPONSE:", response.json())
         assert response.status_code == 200
 
         data = response.json()

@@ -26,6 +26,13 @@ class ApiClient:
 
         return response
 
+    def register(self, user_data):
+        """Регистрация нового пользователя"""
+        return self.session.post(
+            f"{self.base_url}/auth/register",
+            json=user_data
+        )
+
     def get_products(self, filters=None):
         """Получить список товаров"""
         return self.session.get(

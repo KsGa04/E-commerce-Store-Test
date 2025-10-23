@@ -47,6 +47,33 @@ class TestProductsGet:
         for product in data["products"]:
             assert "headphone" in product["name"].lower()
 
+    def test_get_products_invalid_filters(self, api_client):
+        """GET /products - невалидные параметры фильтрации"""
+        # Отрицательные цены - API может их игнорировать или обрабатывать
+        response = api_client.get_products({"minPrice": -10})
+        print("NEGATIVE PRICE RESPONSE:", response.status_code, response.json())
+
+        # API может вернуть 200 с пустым списком или проигнорировать фильтр
+        assert response.status_code == 200
+
+        # minPrice > maxPrice - API может игнорировать или менять местами
+        response = api_client.get_products({"minPrice": 500, "maxPrice": 100})
+        print("INVERTED PRICE RANGE:", response.status_code, response.json())
+        assert response.status_code == 200
+
+        # Несуществующая категория
+        response = api_client.get_products({"category": "NonexistentCategory"})
+        print("NONEXISTENT CATEGORY:", response.status_code, response.json())
+        assert response.status_code == 200
+        # Должен вернуть пустой список
+        assert len(response.json()["products"]) == 0
+
+        # Слишком длинный search запрос
+        long_search = "a" * 1000
+        response = api_client.get_products({"search": long_search})
+        print("LONG SEARCH:", response.status_code, response.json())
+        assert response.status_code == 200
+
     def test_get_single_product(self, api_client):
         """GET /products/{id} - получить товар по ID"""
         # Сначала получаем список товаров
