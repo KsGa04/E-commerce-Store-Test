@@ -1,6 +1,21 @@
 import pytest
+import sys
+import os
+import random
+import string
+
+# Добавляем корневую директорию в path
+project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+sys.path.insert(0, project_root)
+
 from src.api.client import ApiClient
 from config.environment import Environment
+
+
+def generate_unique_product_name():
+    """Генерация уникального имени товара"""
+    random_suffix = ''.join(random.choices(string.ascii_lowercase + string.digits, k=6))
+    return f"Test Product {random_suffix}"
 
 
 @pytest.fixture
@@ -22,9 +37,9 @@ def auth_client():
 
 @pytest.fixture
 def sample_product():
-    """Тестовые данные товара"""
+    """Тестовые данные товара с уникальным именем"""
     return {
-        "name": "Test Gaming Keyboard",
+        "name": generate_unique_product_name(),
         "description": "Mechanical gaming keyboard with RGB",
         "price": 129.99,
         "category": "Electronics",

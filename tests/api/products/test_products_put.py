@@ -1,18 +1,29 @@
 import pytest
 import allure
+import random
+import string
 from tests.api.conftest import extract_product_id
 
 
 @allure.feature("Products - PUT")
 class TestProductsPut:
 
+    def generate_unique_product_name(self):
+        """Генерация уникального имени товара"""
+        random_suffix = ''.join(random.choices(string.ascii_lowercase + string.digits, k=6))
+        return f"Test Product {random_suffix}"
+
     def test_put_update_product_success(self, auth_client, sample_product):
         """PUT /products/{id} - успешное полное обновление"""
-        create_response = auth_client.create_product(sample_product)
-        product_id = extract_product_id(create_response, sample_product["name"], auth_client)
+        # Используем уникальное имя для создания
+        unique_product = sample_product.copy()
+        unique_product["name"] = self.generate_unique_product_name()
+
+        create_response = auth_client.create_product(unique_product)
+        product_id = extract_product_id(create_response, unique_product["name"], auth_client)
 
         update_data = {
-            "name": "Fully Updated Product",
+            "name": self.generate_unique_product_name(),  # Новое уникальное имя
             "description": "Completely updated description",
             "price": 199.99,
             "category": "Home Appliances",
@@ -21,6 +32,7 @@ class TestProductsPut:
         }
 
         response = auth_client.update_product(product_id, update_data, method="PUT")
+        print("PUT RESPONSE:", response.json())  # Для отладки
         assert response.status_code == 200
 
         data = response.json()
