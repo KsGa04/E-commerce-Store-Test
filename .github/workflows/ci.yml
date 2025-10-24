@@ -11,8 +11,11 @@ jobs:
     name: Run tests on Python ${{ matrix.python-version }}
     runs-on: ubuntu-latest
     strategy:
+      # Не прерывать матрицу при падении одного job (опционально)
+      fail-fast: false
       matrix:
-        python-version: [3.8, 3.9, 3.10, 3.11]
+        # ВАЖНО: версии окружены кавычками, чтобы YAML трактовал их как строки
+        python-version: ['3.10', '3.11', '3.12', '3.13']
 
     steps:
       - name: Checkout repository
@@ -26,9 +29,7 @@ jobs:
       - name: Cache pip
         uses: actions/cache@v4
         with:
-          path: |
-            ~/.cache/pip
-            ~/.local/lib/python*/site-packages
+          path: ~/.cache/pip
           key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}-${{ matrix.python-version }}
           restore-keys: |
             ${{ runner.os }}-pip-${{ matrix.python-version }}-
@@ -39,37 +40,20 @@ jobs:
           pip install -r requirements.txt
           pip install coverage
 
-      - name: Run tests with pytest (verbosity)
+      - name: Run tests with pytest
         run: |
           coverage run -m pytest -q
           coverage xml -i -o coverage.xml
           coverage html -d htmlcov
 
-      - name: Upload coverage HTML report (artifact)
+      - name: Upload coverage HTML report
         uses: actions/upload-artifact@v4
         with:
           name: coverage-report
           path: htmlcov
 
-      - name: Upload coverage XML (for external services)
+      - name: Upload coverage XML
         uses: actions/upload-artifact@v4
         with:
           name: coverage-xml
           path: coverage.xml
-
-      - name: Annotate failing tests (optional, prints junit xml)
-        if: failure()
-        run: |
-          echo "One or more tests failed. See logs above."
-
-  # Optional: combine matrix results into single summary job (runs after all matrix jobs)
-  summary:
-    name: Summary (collect artifacts)
-    needs: test
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout
-        uses: actions/checkout@v4
-      - name: List artifacts
-        run: |
-          echo "If you want to publish aggregated results, add steps here."

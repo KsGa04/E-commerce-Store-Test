@@ -4,9 +4,10 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5c4584b-287f-4cef-aea7-0ae973b04d66" name="Changes" comment="Улучшена генерация отчетов">
+    <list default="true" id="f5c4584b-287f-4cef-aea7-0ae973b04d66" name="Changes" comment="Обновлен requirements.txt и добавлен ci">
       <change afterPath="$PROJECT_DIR$/.github/workflows/ci.yml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/requirements.txt" beforeDir="false" afterPath="$PROJECT_DIR$/requirements.txt" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -284,7 +285,15 @@
       <option name="project" value="LOCAL" />
       <updated>1761300961653</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="Обновлен requirements.txt и добавлен ci">
+      <option name="closed" value="true" />
+      <created>1761304726852</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1761304726852</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -297,6 +306,7 @@
     <MESSAGE value="Тесты frontend с возможностью генерации отчетов allure" />
     <MESSAGE value="Подкорректированы тесты" />
     <MESSAGE value="Улучшена генерация отчетов" />
-    <option name="LAST_COMMIT_MESSAGE" value="Улучшена генерация отчетов" />
+    <MESSAGE value="Обновлен requirements.txt и добавлен ci" />
+    <option name="LAST_COMMIT_MESSAGE" value="Обновлен requirements.txt и добавлен ci" />
   </component>
 </project>
