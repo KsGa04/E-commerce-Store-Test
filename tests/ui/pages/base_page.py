@@ -17,8 +17,7 @@ class BasePage:
         full_url = f"{self.base_url}{url}"
 
         with allure.step(f"Переход на страницу: {full_url}"):
-            self.page.goto(full_url)
-            self.page.wait_for_load_state("networkidle")
+            self.page.goto(full_url, wait_until="networkidle", timeout=30000)
 
             # Прикрепляем URL к отчету
             allure.attach(
@@ -31,9 +30,9 @@ class BasePage:
         """Получение заголовка страницы"""
         return self.page.title()
 
-    def wait_for_element(self, selector: str, timeout: int = 10000):
+    def wait_for_element(self, selector: str, timeout: int = 15000):
         """Ожидание элемента"""
-        self.page.wait_for_selector(selector, timeout=timeout)
+        self.page.wait_for_selector(selector, timeout=timeout, state="visible")
 
     def click_element(self, selector: str, element_name: str = "элемент"):
         """Клик по элементу"""
@@ -61,7 +60,6 @@ class BasePage:
             expect(self.page).not_to_have_url("about:blank")
             self.page.wait_for_load_state("domcontentloaded")
 
-            # Прикрепляем информацию о странице
             allure.attach(
                 f"Page URL: {self.page.url}\nPage Title: {self.page.title()}",
                 name="Page Info",

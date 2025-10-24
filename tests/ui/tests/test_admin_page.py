@@ -14,18 +14,7 @@ class TestAdminPage:
             admin_page.navigate_to_admin()
 
         with allure.step("Проверка редиректа на страницу логина"):
-            # Ожидаем редирект на логин
-            expect(admin_page.page).to_have_url(admin_page.base_url + "/login")
-
-            # Проверяем что видна форма логина
-            login_form = admin_page.page.locator(admin_page.login_form)
-            expect(login_form).to_be_visible()
-
-            allure.attach(
-                "Админская страница корректно перенаправляет на логин",
-                name="Admin Redirect",
-                attachment_type=allure.attachment_type.TEXT
-            )
+            admin_page.verify_admin_redirect()
 
     def test_admin_page_access_requires_login(self, admin_page, login_page):
         """Тест что доступ к админке требует аутентификации"""
@@ -35,7 +24,6 @@ class TestAdminPage:
         with allure.step("Проверка что мы на странице логина"):
             expect(login_page.page).to_have_url(login_page.base_url + "/login")
 
-            # Проверяем элементы формы логина
             username_input = login_page.page.locator(login_page.username_input)
             password_input = login_page.page.locator(login_page.password_input)
             expect(username_input).to_be_visible()
@@ -52,10 +40,8 @@ class TestAdminPage:
         admin_page.navigate_to_admin()
 
         with allure.step("Проверка мета-информации после редиректа"):
-            # После редиректа мы на странице логина, проверяем её мета-инфо
             expect(admin_page.page).to_have_title("v0 App")
 
-            # Проверка мета-тега description
             meta_description = admin_page.page.locator('meta[name="description"]')
             expect(meta_description).to_have_attribute("content", "Created with v0")
 
@@ -74,14 +60,11 @@ class TestAdminPage:
         admin_page.navigate_to_admin()
 
         with allure.step("Проверка редиректа на мобильном устройстве"):
-            # Проверяем что редирект работает и на мобильном
             expect(admin_page.page).to_have_url(admin_page.base_url + "/login")
 
-            # Проверяем что форма логина видима на мобильном
             login_form = admin_page.page.locator(admin_page.login_form)
             expect(login_form).to_be_visible()
 
-            # Делаем скриншот мобильной версии
             admin_page.take_screenshot("admin_redirect_mobile")
 
             allure.attach(
