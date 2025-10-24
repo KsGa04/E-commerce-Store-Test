@@ -1,4 +1,4 @@
-name: CI Tests
+name: CI - Tests & Coverage (Python 3.12)
 
 on:
   push:
@@ -9,12 +9,11 @@ on:
 jobs:
   test:
     runs-on: ubuntu-latest
-    # Если хотите запускать на нескольких версиях python — замените python-version на матрицу
     strategy:
       fail-fast: false
 
     steps:
-      - name: Checkout code
+      - name: Checkout repository
         uses: actions/checkout@v4
 
       - name: Set up Python 3.12
@@ -23,123 +22,74 @@ jobs:
           python-version: '3.12'
           cache: 'pip'
 
-      - name: Diagnostic: python info
+      - name: Show Python info
         run: |
           python --version
           which python || true
-          python -c "import sys; print('sys.executable=', sys.executable); print('sys.path[0:6]=', sys.path[0:6])"
+          python -c "import sys, platform; print('executable=', sys.executable); print('sys.path sample=', sys.path[:4]); print('platform=', platform.platform())"
 
-      - name: Upgrade pip / wheel / setuptools
+      - name: Upgrade pip & tools
         run: |
           python -m pip install --upgrade pip setuptools wheel
 
-      - name: Install Python requirements (if exists)
+      - name: Install Python dependencies (if exists)
         run: |
           if [ -f "requirements.txt" ]; then
             pip install -r requirements.txt
           else
-            echo "requirements.txt not found — skipping pip install"
+            echo "requirements.txt not found — skipping"
           fi
-          # ensure useful test tools available
-          pip install pytest coverage allure-pytest || true
+          pip install pytest coverage || true
 
-      - name: Set up Node.js (for Playwright)
-        uses: actions/setup-node@v4
-        with:
-          node-version: '18'
-          cache: 'npm'
-
-      - name: Install npm dependencies (if package.json exists)
-        run: |
-          if [ -f "package-lock.json" ]; then
-            npm ci
-          elif [ -f "package.json" ]; then
-            npm install
-          else
-            echo "No package.json found — skipping npm install"
-          fi
-
-      - name: Install Playwright browsers and deps (if Playwright used)
-        run: |
-          # install OS deps for playwright (if needed) and browsers
-          # npx playwright install-deps can require sudo on some runners; works on ubuntu-latest
-          if [ -f "package.json" ] || command -v npx >/dev/null 2>&1; then
-            npx playwright install-deps || true
-            npx playwright install || true
-          else
-            echo "Playwright not detected (no package.json / npx) — skipping"
-          fi
-
-      - name: Try to install package in editable mode (if packaging metadata present)
-        id: install_editable
+      - name: Try editable install (pip install -e .) when packaging files exist
+        id: install-editable
         run: |
           if [ -f "pyproject.toml" ] || [ -f "setup.py" ] || [ -f "setup.cfg" ]; then
-            echo "Detected packaging metadata, running: pip install -e ."
-            pip install -e . || true
+            echo "Found package metadata, attempting pip install -e ."
+            pip install -e . || echo "editable install failed"
             echo "installed_editable=true" >> $GITHUB_OUTPUT
           else
             echo "installed_editable=false" >> $GITHUB_OUTPUT
           fi
 
-      - name: Add src to PYTHONPATH if editable install not performed
-        if: steps.install_editable.outputs.installed_editable == 'false'
+      - name: Add ./src to PYTHONPATH fallback
+        if: steps.install-editable.outputs.installed_editable == 'false'
         run: |
           if [ -d "src" ]; then
             echo "Adding ./src to PYTHONPATH"
             echo "PYTHONPATH=$PWD/src" >> $GITHUB_ENV
-            python -c "import sys; print('PYTHONPATH added, sys.path[0:4]=', sys.path[0:4])"
+            python -c "import sys; print('Added src to sys.path sample:', sys.path[:3])"
           else
-            echo "No ./src directory detected; assuming imports are relative or repo layout different"
+            echo "No src directory; ensure tests import path is correct"
           fi
 
-      - name: Show installed Python packages (top)
+      - name: Run pytest with coverage
         run: |
-          pip list --format=columns | head -n 60 || true
+          mkdir -p reports
+          coverage run -m pytest -q || true
+          coverage xml -i -o coverage.xml || true
+          coverage html -d htmlcov || true
 
-      - name: Run API tests (pytest)
-        run: |
-          # создаём папку для результатов allure
-          mkdir -p reports/allure-results
-          # запускаем API тесты, если такая папка есть
-          if [ -d "tests/api" ]; then
-            pytest tests/api/ -v --alluredir=reports/allure-results || true
-          else
-            echo "No tests/api directory — skipping API tests"
-          fi
-
-      - name: Run UI tests (pytest Playwright)
-        env:
-          HEADLESS: true
-        run: |
-          mkdir -p reports/allure-results
-          if [ -d "tests/ui" ] || [ -d "tests/ui/tests" ]; then
-            pytest tests/ui/ -v --alluredir=reports/allure-results || true
-          else
-            echo "No tests/ui directory — skipping UI tests"
-          fi
-
-      - name: Upload Allure results (artifact)
+      - name: Upload coverage HTML report
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: allure-results
-          path: reports/allure-results
+          name: coverage-report
+          path: htmlcov
 
-      - name: Test Summary
+      - name: Upload coverage XML
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-xml
+          path: coverage.xml
+
+      - name: Job summary
         if: always()
         run: |
-          echo "## Test Results Summary" >> $GITHUB_STEP_SUMMARY
-          echo "" >> $GITHUB_STEP_SUMMARY
-          # check whether API results exist
-          if [ -d "reports/allure-results" ] && [ "$(ls -A reports/allure-results || true)" != "" ]; then
-            echo "✅ **Tests produced Allure results**" >> $GITHUB_STEP_SUMMARY
-            echo "📦 **Report Artifact**: Download 'allure-results' from the Actions run." >> $GITHUB_STEP_SUMMARY
+          echo "## Test summary" >> $GITHUB_STEP_SUMMARY
+          if [ -d "htmlcov" ]; then
+            echo "- ✅ HTML coverage report available as artifact 'coverage-report'." >> $GITHUB_STEP_SUMMARY
           else
-            echo "⚠️ **No Allure results found**" >> $GITHUB_STEP_SUMMARY
-          fi
-          # branch-specific note
-          if [[ "$GITHUB_REF" == "refs/heads/main" ]]; then
-            echo "ℹ️ This run was on the main branch ($GITHUB_REF)." >> $GITHUB_STEP_SUMMARY
-          else
-            echo "ℹ️ Branch: $GITHUB_REF" >> $GITHUB_STEP_SUMMARY
+            echo "- ⚠️ No HTML coverage generated." >> $GITHUB_STEP_SUMMARY
           fi
