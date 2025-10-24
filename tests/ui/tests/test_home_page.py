@@ -2,7 +2,7 @@ import pytest
 from playwright.sync_api import expect
 import allure
 
-
+@pytest.mark.ui
 @pytest.mark.smoke
 class TestHomePage:
     """Тесты для главной страницы"""

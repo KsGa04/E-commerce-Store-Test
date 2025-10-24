@@ -3,8 +3,9 @@ from playwright.sync_api import expect
 import time
 
 
-@pytest.mark.smoke
+@pytest.mark.ui
 @pytest.mark.login
+@pytest.mark.smoke
 class TestLoginPage:
     """Тесты для страницы логина"""
 

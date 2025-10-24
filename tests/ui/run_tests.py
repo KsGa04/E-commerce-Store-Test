@@ -28,12 +28,10 @@ def check_allure_installed():
 def run_tests():
     """Запуск тестов с разными опциями"""
 
-    # Получаем абсолютный путь к директории с тестами
-    current_dir = os.path.dirname(__file__)
-    tests_dir = os.path.join(current_dir, "tests")
+    # Получаем корневую директорию проекта
+    project_root = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
     # Определяем пути для отчетов
-    project_root = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
     allure_results_dir = os.path.join(project_root, "reports", "allure-results")
     allure_report_dir = os.path.join(project_root, "reports", "allure-report")
 
@@ -41,31 +39,25 @@ def run_tests():
     allure_path = check_allure_installed()
     allure_installed = allure_path is not None
 
-    commands = [
-        # Запуск всех тестов
-        ["pytest", tests_dir, "-v"],
-
-        # Запуск smoke тестов
-        ["pytest", tests_dir, "-m", "smoke", "-v"],
-
-        # Запуск тестов логина
-        ["pytest", tests_dir, "-m", "login", "-v"],
-
-        # Запуск тестов админки
-        ["pytest", tests_dir, "-m", "admin", "-v"],
-
-        # Запуск regression тестов
-        ["pytest", tests_dir, "-m", "regression", "-v"],
-
-        # Запуск с генерацией Allure отчетов
-        ["pytest", tests_dir, "-v", "--alluredir", allure_results_dir, "--clean-alluredir"],
-
-        # Параллельный запуск всех тестов
-        ["pytest", tests_dir, "-n", "auto", "-v", "--alluredir", allure_results_dir],
-    ]
+    commands = {
+        "1": ["pytest", "-v"],  # Все тесты
+        "2": ["pytest", "-m", "smoke", "-v"],  # Smoke тесты
+        "3": ["pytest", "-m", "login", "-v"],  # Тесты логина
+        "4": ["pytest", "-m", "admin", "-v"],  # Тесты админки
+        "5": ["pytest", "-m", "regression", "-v"],  # Regression тесты
+        "6": ["pytest", "-m", "api", "-v"],  # Только API тесты
+        "7": ["pytest", "-m", "ui", "-v"],  # Только UI тесты
+        "8": ["pytest", "-v", "--alluredir", allure_results_dir],  # С Allure отчетом
+        "9": ["pytest", "-n", "auto", "-v", "--alluredir", allure_results_dir],  # Параллельный запуск
+    }
 
     print("=" * 60)
     print("🚀 СИСТЕМА ЗАПУСКА ТЕСТОВ")
+    print("=" * 60)
+    print("✅ Настройки pytest.ini:")
+    print(f"   - testpaths: tests")
+    print(f"   - allure-results: {allure_results_dir}")
+    print(f"   - Запуск всех тестов: API + UI")
     print("=" * 60)
 
     if allure_installed:
@@ -75,102 +67,60 @@ def run_tests():
     print("=" * 60)
 
     print("Выберите вариант запуска:")
-    print("1 - 🔄 Все тесты")
-    print("2 - 🔥 Smoke тесты (основная функциональность)")
+    print("1 - 🔄 Все тесты (API + UI)")
+    print("2 - 🔥 Smoke тесты")
     print("3 - 🔐 Тесты логина")
     print("4 - ⚙️  Тесты админки")
     print("5 - 📊 Regression тесты")
-    print("6 - 📈 Запуск с генерацией Allure отчетов")
-    print("7 - ⚡ Параллельный запуск всех тестов")
-    print("8 - 🎯 Только генерация Allure отчета")
+    print("6 - 🌐 Только API тесты")
+    print("7 - 🖥️  Только UI тесты")
+    print("8 - 📈 Запуск с генерацией Allure отчетов")
+    print("9 - ⚡ Параллельный запуск всех тестов")
+    print("0 - 🎯 Только генерация Allure отчета")
     print("=" * 60)
 
-    choice = input("Введите номер (1-8): ").strip()
+    choice = input("Введите номер (0-9): ").strip()
 
-    if choice in ["1", "2", "3", "4", "5"]:
-        command_index = int(choice) - 1
-        command = commands[command_index]
-
-        # Добавляем Allure если установлен
-        if allure_installed:
-            command.extend(["--alluredir", allure_results_dir])
-
-        print(f"🔄 Запуск: {' '.join(command)}")
-        print("=" * 60)
-
-        # Устанавливаем правильную рабочую директорию
-        os.chdir(current_dir)
-
-        # Создаем директории для отчетов
-        os.makedirs(allure_results_dir, exist_ok=True)
-        os.makedirs(allure_report_dir, exist_ok=True)
-
-        result = subprocess.run(command)
-
-        # Предлагаем открыть отчет после завершения
-        if allure_installed and result.returncode in [0, 1]:
-            open_report = input("\n📊 Хотите открыть Allure отчет? (y/n): ").strip().lower()
-            if open_report == 'y':
-                generate_and_open_report(allure_path, allure_results_dir, allure_report_dir)
-        elif not allure_installed:
-            print("\n📊 Allure не установлен. Отчет не может быть сгенерирован.")
-
-        sys.exit(result.returncode)
-
-    elif choice == "6":
+    if choice == "0":
         if not allure_installed:
             print("❌ Allure не установлен. Сначала установите Allure.")
             sys.exit(1)
-
-        command = commands[5]  # Запуск с генерацией Allure
-        print(f"🔄 Запуск: {' '.join(command)}")
-        print("=" * 60)
-
-        os.chdir(current_dir)
-        os.makedirs(allure_results_dir, exist_ok=True)
-        os.makedirs(allure_report_dir, exist_ok=True)
-
-        result = subprocess.run(command)
-
-        if result.returncode in [0, 1]:
-            open_report = input("\n📊 Хотите открыть Allure отчет? (y/n): ").strip().lower()
-            if open_report == 'y':
-                generate_and_open_report(allure_path, allure_results_dir, allure_report_dir)
-
-        sys.exit(result.returncode)
-
-    elif choice == "7":
-        command = commands[6]  # Параллельный запуск
-
-        print(f"🔄 Запуск: {' '.join(command)}")
-        print("=" * 60)
-
-        os.chdir(current_dir)
-        os.makedirs(allure_results_dir, exist_ok=True)
-        os.makedirs(allure_report_dir, exist_ok=True)
-
-        result = subprocess.run(command)
-
-        if allure_installed and result.returncode in [0, 1]:
-            open_report = input("\n📊 Хотите открыть Allure отчет? (y/n): ").strip().lower()
-            if open_report == 'y':
-                generate_and_open_report(allure_path, allure_results_dir, allure_report_dir)
-        elif not allure_installed:
-            print("\n📊 Allure не установлен. Отчет не может быть сгенерирован.")
-
-        sys.exit(result.returncode)
-
-    elif choice == "8":
-        if not allure_installed:
-            print("❌ Allure не установлен. Сначала установите Allure.")
-            sys.exit(1)
-
         print("🎯 Генерация Allure отчета из существующих результатов")
         generate_and_open_report(allure_path, allure_results_dir, allure_report_dir)
+        return
 
-    else:
+    if choice not in commands:
         print("❌ Неверный выбор")
         sys.exit(1)
+
+    command = commands[choice].copy()
+
+    # Добавляем Allure ко всем командам если выбран не Allure-специфичный вариант
+    if choice in ["1", "2", "3", "4", "5", "6", "7"] and allure_installed:
+        command.extend(["--alluredir", allure_results_dir])
+
+    print(f"🔄 Запуск: {' '.join(command)}")
+    print("=" * 60)
+
+    # Устанавливаем рабочую директорию в корень проекта
+    os.chdir(project_root)
+
+    # Создаем директории для отчетов
+    os.makedirs(allure_results_dir, exist_ok=True)
+    os.makedirs(allure_report_dir, exist_ok=True)
+
+    # Запускаем тесты
+    result = subprocess.run(command)
+
+    # Предлагаем открыть отчет после завершения
+    if allure_installed and result.returncode in [0, 1]:
+        open_report = input("\n📊 Хотите открыть Allure отчет? (y/n): ").strip().lower()
+        if open_report == 'y':
+            generate_and_open_report(allure_path, allure_results_dir, allure_report_dir)
+    elif not allure_installed:
+        print("\n📊 Allure не установлен. Отчет не может быть сгенерирован.")
+
+    sys.exit(result.returncode)
 
 
 def generate_and_open_report(allure_path, results_dir, report_dir):

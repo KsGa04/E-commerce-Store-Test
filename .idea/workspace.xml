@@ -4,12 +4,27 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5c4584b-287f-4cef-aea7-0ae973b04d66" name="Changes" comment="Тесты frontend с возможностью генерации отчетов allure">
+    <list default="true" id="f5c4584b-287f-4cef-aea7-0ae973b04d66" name="Changes" comment="Подкорректированы тесты">
+      <change afterPath="$PROJECT_DIR$/pyproject.toml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/ui/pages/admin_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/ui/pages/admin_page.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/ui/pages/base_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/ui/pages/base_page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pytest.ini" beforeDir="false" afterPath="$PROJECT_DIR$/pytest.ini" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/api/auth/test_auth_login.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/api/auth/test_auth_login.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/api/auth/test_auth_register.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/api/auth/test_auth_register.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/api/categories/test_categories_get.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/api/categories/test_categories_get.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/api/integration/test_workflows.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/api/integration/test_workflows.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/api/products/test_products_delete.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/api/products/test_products_delete.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/api/products/test_products_get.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/api/products/test_products_get.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/api/products/test_products_patch.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/api/products/test_products_patch.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/api/products/test_products_post.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/api/products/test_products_post.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/api/products/test_products_put.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/api/products/test_products_put.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/api/products/test_products_validation.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/api/products/test_products_validation.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/api/reviews/test_reviews_get.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/api/reviews/test_reviews_get.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/api/reviews/test_reviews_post.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/api/reviews/test_reviews_post.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/ui/run_tests.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/ui/run_tests.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/ui/tests/test_admin_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/ui/tests/test_admin_page.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/ui/tests/test_home_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/ui/tests/test_home_page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/ui/tests/test_login_page.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/ui/tests/test_login_page.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/ui/tests/test_navigation.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/ui/tests/test_navigation.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -271,7 +286,15 @@
       <option name="project" value="LOCAL" />
       <updated>1761227399866</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="Подкорректированы тесты">
+      <option name="closed" value="true" />
+      <created>1761293695937</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1761293695937</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -282,6 +305,7 @@
     <MESSAGE value="Добавлены тесты для категорий и отзывов" />
     <MESSAGE value="Подкорректированы тесты и добавлены интеграционные" />
     <MESSAGE value="Тесты frontend с возможностью генерации отчетов allure" />
-    <option name="LAST_COMMIT_MESSAGE" value="Тесты frontend с возможностью генерации отчетов allure" />
+    <MESSAGE value="Подкорректированы тесты" />
+    <option name="LAST_COMMIT_MESSAGE" value="Подкорректированы тесты" />
   </component>
 </project>
