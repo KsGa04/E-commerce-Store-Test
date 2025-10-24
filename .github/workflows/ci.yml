@@ -1,0 +1,75 @@
+name: CI - Tests & Coverage
+
+on:
+  push:
+    branches: [ main, master ]
+  pull_request:
+    branches: [ main, master ]
+
+jobs:
+  test:
+    name: Run tests on Python ${{ matrix.python-version }}
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python-version: [3.8, 3.9, 3.10, 3.11]
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Set up Python ${{ matrix.python-version }}
+        uses: actions/setup-python@v4
+        with:
+          python-version: ${{ matrix.python-version }}
+
+      - name: Cache pip
+        uses: actions/cache@v4
+        with:
+          path: |
+            ~/.cache/pip
+            ~/.local/lib/python*/site-packages
+          key: ${{ runner.os }}-pip-${{ hashFiles('**/requirements.txt') }}-${{ matrix.python-version }}
+          restore-keys: |
+            ${{ runner.os }}-pip-${{ matrix.python-version }}-
+
+      - name: Install dependencies
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements.txt
+          pip install coverage
+
+      - name: Run tests with pytest (verbosity)
+        run: |
+          coverage run -m pytest -q
+          coverage xml -i -o coverage.xml
+          coverage html -d htmlcov
+
+      - name: Upload coverage HTML report (artifact)
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-report
+          path: htmlcov
+
+      - name: Upload coverage XML (for external services)
+        uses: actions/upload-artifact@v4
+        with:
+          name: coverage-xml
+          path: coverage.xml
+
+      - name: Annotate failing tests (optional, prints junit xml)
+        if: failure()
+        run: |
+          echo "One or more tests failed. See logs above."
+
+  # Optional: combine matrix results into single summary job (runs after all matrix jobs)
+  summary:
+    name: Summary (collect artifacts)
+    needs: test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: List artifacts
+        run: |
+          echo "If you want to publish aggregated results, add steps here."
