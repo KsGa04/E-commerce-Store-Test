@@ -2,9 +2,11 @@ name: CI Tests
 
 on:
   push:
-    branches: [ main, develop ]
+    branches: [ main, develop, feature/** ]
   pull_request:
     branches: [ main, develop ]
+  schedule:
+    - cron: '0 2 * * *'  # Ежедневный запуск в 2:00 AM
   workflow_dispatch:
 
 jobs:
@@ -14,6 +16,12 @@ jobs:
       fail-fast: false
 
     steps:
+      - name: Debug Info
+        run: |
+          echo "Event: ${{ github.event_name }}"
+          echo "Ref: ${{ github.ref }}"
+          echo "HEAD SHA: ${{ github.sha }}"
+
       - name: Checkout code
         uses: actions/checkout@v4
 

@@ -4,9 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5c4584b-287f-4cef-aea7-0ae973b04d66" name="Changes" comment="Fix CI configuration">
-      <change beforePath="$PROJECT_DIR$/tests/ui/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/ui/conftest.py" afterDir="false" />
-    </list>
+    <list default="true" id="f5c4584b-287f-4cef-aea7-0ae973b04d66" name="Changes" comment="Fix CI + Conftest" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -379,7 +377,15 @@
       <option name="project" value="LOCAL" />
       <updated>1761308964750</updated>
     </task>
-    <option name="localTasksCounter" value="22" />
+    <task id="LOCAL-00022" summary="Fix CI + Conftest">
+      <option name="closed" value="true" />
+      <created>1761309783666</created>
+      <option name="number" value="00022" />
+      <option name="presentableId" value="LOCAL-00022" />
+      <option name="project" value="LOCAL" />
+      <updated>1761309783666</updated>
+    </task>
+    <option name="localTasksCounter" value="23" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -399,6 +405,7 @@
     <MESSAGE value="ci: fixed workflow YAML for GitHub Actions" />
     <MESSAGE value="ci: fix workflow YAML (remove invalid expressions in run)" />
     <MESSAGE value="Fix CI configuration" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix CI configuration" />
+    <MESSAGE value="Fix CI + Conftest" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix CI + Conftest" />
   </component>
 </project>
