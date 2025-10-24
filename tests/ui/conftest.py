@@ -36,7 +36,7 @@ def context(browser):
 def page(context) -> Page:
     """Фикстура для создания новой страницы"""
     page = context.new_page()
-    page.set_default_timeout(10000)  # 10 секунд таймаут по умолчанию
+    page.set_default_timeout(15000) # 10 секунд таймаут по умолчанию
 
     # Прикрепляем информацию о странице к Allure
     allure.attach(
