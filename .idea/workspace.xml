@@ -4,9 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5c4584b-287f-4cef-aea7-0ae973b04d66" name="Changes" comment="ci: fix workflow YAML for Python 3.12">
+    <list default="true" id="f5c4584b-287f-4cef-aea7-0ae973b04d66" name="Changes" comment="ci: fix workflow YAML (remove invalid expressions in run)">
       <change beforePath="$PROJECT_DIR$/.github/workflows/ci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/ci.yml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -356,7 +355,23 @@
       <option name="project" value="LOCAL" />
       <updated>1761306525161</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="ci: fixed workflow YAML for GitHub Actions">
+      <option name="closed" value="true" />
+      <created>1761308520092</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1761308520092</updated>
+    </task>
+    <task id="LOCAL-00020" summary="ci: fix workflow YAML (remove invalid expressions in run)">
+      <option name="closed" value="true" />
+      <created>1761308768125</created>
+      <option name="number" value="00020" />
+      <option name="presentableId" value="LOCAL-00020" />
+      <option name="project" value="LOCAL" />
+      <updated>1761308768125</updated>
+    </task>
+    <option name="localTasksCounter" value="21" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -373,6 +388,8 @@
     <MESSAGE value="Исправление ci" />
     <MESSAGE value="ci: fix github actions workflow for Python 3.12 + Playwright + Allure" />
     <MESSAGE value="ci: fix workflow YAML for Python 3.12" />
-    <option name="LAST_COMMIT_MESSAGE" value="ci: fix workflow YAML for Python 3.12" />
+    <MESSAGE value="ci: fixed workflow YAML for GitHub Actions" />
+    <MESSAGE value="ci: fix workflow YAML (remove invalid expressions in run)" />
+    <option name="LAST_COMMIT_MESSAGE" value="ci: fix workflow YAML (remove invalid expressions in run)" />
   </component>
 </project>

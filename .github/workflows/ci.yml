@@ -17,90 +17,72 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Set up Python 3.12
+      - name: Set up Python 3.11
         uses: actions/setup-python@v4
         with:
-          python-version: '3.12'
+          python-version: '3.11'
           cache: 'pip'
 
-      - name: Show Python info
+      - name: Install Python dependencies
         run: |
-          python --version
-          which python || true
-          python -c "import sys, platform; print('executable=', sys.executable); print('sys.path sample=', sys.path[:4]); print('platform=', platform.platform())"
+          python -m pip install --upgrade pip
+          pip install pytest requests allure-pytest pytest-xdist
 
-      - name: Upgrade pip & tools
+      - name: Install Playwright
         run: |
-          python -m pip install --upgrade pip setuptools wheel
+          pip install playwright
+          python -m playwright install
+          python -m playwright install-deps
 
-      - name: Install Python dependencies (if exists)
+      - name: Show directory structure
         run: |
-          if [ -f "requirements.txt" ]; then
-            pip install -r requirements.txt
-          else
-            echo "requirements.txt not found — skipping"
-          fi
-          pip install pytest coverage || true
+          echo "Project structure:"
+          find . -name "*.py" | head -20
+          echo "Tests structure:"
+          find tests -type f | head -20
 
-      - name: Try editable install (pip install -e .) when packaging files exist
-        id: install-editable
+      - name: Run API tests
         run: |
-          if [ -f "pyproject.toml" ] || [ -f "setup.py" ] || [ -f "setup.cfg" ]; then
-            echo "Found packaging metadata, attempting pip install -e ."
-            pip install -e . || echo "editable install failed"
-            echo "installed_editable=true" >> $GITHUB_OUTPUT
-          else
-            echo "installed_editable=false" >> $GITHUB_OUTPUT
-          fi
+          python -m pytest tests/api/ -v --alluredir=reports/allure-results
 
-      - name: Add ./src to PYTHONPATH fallback
-        if: steps.install-editable.outputs.installed_editable == 'false'
+      - name: Run UI tests
         run: |
-          if [ -d "src" ]; then
-            echo "Adding ./src to PYTHONPATH"
-            echo "PYTHONPATH=$PWD/src" >> $GITHUB_ENV
-            python -c "import sys; print('Added src to sys.path sample:', sys.path[:3])"
-          else
-            echo "No src directory; ensure tests import path is correct"
-          fi
+          python -m pytest tests/ui/tests/ -v --alluredir=reports/allure-results
+        env:
+          HEADLESS: true
 
-      - name: Show installed Python packages (top)
+      - name: Install Allure
         run: |
-          pip list --format=columns | head -n 60 || true
+          sudo apt-get update
+          sudo apt-get install default-jre -y
+          wget -q https://github.com/allure-framework/allure2/releases/download/2.24.1/allure-2.24.1.tgz
+          tar -zxvf allure-2.24.1.tgz
+          sudo mv allure-2.24.1 /opt/allure
+          sudo ln -s /opt/allure/bin/allure /usr/bin/allure
 
-      - name: Run pytest with coverage
+      - name: Generate Allure report
         run: |
-          mkdir -p reports
-          coverage run -m pytest -q || true
-          coverage xml -i -o coverage.xml || true
-          coverage html -d htmlcov || true
+          mkdir -p allure-report
+          allure generate reports/allure-results -o allure-report --clean
 
-      - name: Upload coverage HTML report
-        if: always()
+      - name: Upload Allure report
         uses: actions/upload-artifact@v4
         with:
-          name: coverage-report
-          path: htmlcov
-
-      - name: Upload coverage XML
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: coverage-xml
-          path: coverage.xml
+          name: allure-report
+          path: allure-report
+          retention-days: 30
 
       - name: Test Summary
         if: always()
         run: |
-          echo "## Test Results Summary" >> $GITHUB_STEP_SUMMARY
+          echo "## 🧪 Test Results Summary" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 📊 Test Execution" >> $GITHUB_STEP_SUMMARY
           echo "✅ **API Tests**: Completed" >> $GITHUB_STEP_SUMMARY
           echo "✅ **UI Tests**: Completed" >> $GITHUB_STEP_SUMMARY
-          echo "📊 **Allure Report**: Generated" >> $GITHUB_STEP_SUMMARY
-          if [[ "$GITHUB_REF" == "refs/heads/main" ]]; then
-            owner=$(echo $GITHUB_REPOSITORY | cut -d"/" -f1)
-            repo=$(echo $GITHUB_REPOSITORY | cut -d"/" -f2)
-            echo "🌐 **Live Report**: https://$owner.github.io/$repo/" >> $GITHUB_STEP_SUMMARY
-          else
-            echo "📦 **Report Artifact**: Download from Actions tab" >> $GITHUB_STEP_SUMMARY
-          fi
+          echo "📁 **Allure Report**: Generated and available as artifact" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          echo "### 🔍 Next Steps" >> $GITHUB_STEP_SUMMARY
+          echo "1. Download the 'allure-report' artifact from this run" >> $GITHUB_STEP_SUMMARY
+          echo "2. Extract the artifact" >> $GITHUB_STEP_SUMMARY
+          echo "3. Open `index.html` in your browser to view the detailed report" >> $GITHUB_STEP_SUMMARY
