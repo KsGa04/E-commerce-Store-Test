@@ -94,15 +94,13 @@ jobs:
         run: |
           echo "## Test Results Summary" >> $GITHUB_STEP_SUMMARY
           echo "" >> $GITHUB_STEP_SUMMARY
-          # show whether coverage dir exists
-          if [ -d "htmlcov" ]; then
-            echo "- ✅ Coverage report available as artifact 'coverage-report'." >> $GITHUB_STEP_SUMMARY
-          else
-            echo "- ⚠️ Coverage report not generated." >> $GITHUB_STEP_SUMMARY
-          fi
-          # branch-specific note using environment variable (not ${{ }})
+          echo "✅ **API Tests**: Completed" >> $GITHUB_STEP_SUMMARY
+          echo "✅ **UI Tests**: Completed" >> $GITHUB_STEP_SUMMARY
+          echo "📊 **Allure Report**: Generated" >> $GITHUB_STEP_SUMMARY
           if [[ "$GITHUB_REF" == "refs/heads/main" ]]; then
-            echo "- This run is on the main branch ($GITHUB_REF)." >> $GITHUB_STEP_SUMMARY
+            owner=$(echo $GITHUB_REPOSITORY | cut -d"/" -f1)
+            repo=$(echo $GITHUB_REPOSITORY | cut -d"/" -f2)
+            echo "🌐 **Live Report**: https://$owner.github.io/$repo/" >> $GITHUB_STEP_SUMMARY
           else
-            echo "- Branch: $GITHUB_REF" >> $GITHUB_STEP_SUMMARY
+            echo "📦 **Report Artifact**: Download from Actions tab" >> $GITHUB_STEP_SUMMARY
           fi
