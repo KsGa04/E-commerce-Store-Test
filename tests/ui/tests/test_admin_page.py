@@ -42,7 +42,7 @@ class TestAdminPage:
         with allure.step("Проверка мета-информации после редиректа"):
             expect(admin_page.page).to_have_title("v0 App")
 
-            meta_description = admin_page.page.locator('meta[name="description"]')
+            meta_description = admin_page.page.locator('meta[name="description"]').first
             expect(meta_description).to_have_attribute("content", "Created with v0")
 
             allure.attach(
