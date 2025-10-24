@@ -4,8 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5c4584b-287f-4cef-aea7-0ae973b04d66" name="Changes" comment="ci: fix github actions workflow for Python 3.12 + Playwright + Allure">
+    <list default="true" id="f5c4584b-287f-4cef-aea7-0ae973b04d66" name="Changes" comment="ci: fix workflow YAML for Python 3.12">
       <change beforePath="$PROJECT_DIR$/.github/workflows/ci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/ci.yml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -331,7 +332,31 @@
       <option name="project" value="LOCAL" />
       <updated>1761306040865</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="ci: fix workflow YAML for Python 3.12">
+      <option name="closed" value="true" />
+      <created>1761306189368</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1761306189368</updated>
+    </task>
+    <task id="LOCAL-00017" summary="ci: fix workflow YAML for Python 3.12">
+      <option name="closed" value="true" />
+      <created>1761306215275</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1761306215275</updated>
+    </task>
+    <task id="LOCAL-00018" summary="ci: fix workflow YAML for Python 3.12">
+      <option name="closed" value="true" />
+      <created>1761306525161</created>
+      <option name="number" value="00018" />
+      <option name="presentableId" value="LOCAL-00018" />
+      <option name="project" value="LOCAL" />
+      <updated>1761306525161</updated>
+    </task>
+    <option name="localTasksCounter" value="19" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -347,6 +372,7 @@
     <MESSAGE value="Обновлен requirements.txt и добавлен ci" />
     <MESSAGE value="Исправление ci" />
     <MESSAGE value="ci: fix github actions workflow for Python 3.12 + Playwright + Allure" />
-    <option name="LAST_COMMIT_MESSAGE" value="ci: fix github actions workflow for Python 3.12 + Playwright + Allure" />
+    <MESSAGE value="ci: fix workflow YAML for Python 3.12" />
+    <option name="LAST_COMMIT_MESSAGE" value="ci: fix workflow YAML for Python 3.12" />
   </component>
 </project>

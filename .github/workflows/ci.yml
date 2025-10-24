@@ -1,4 +1,4 @@
-name: CI - Tests & Coverage (Python 3.12)
+name: CI Tests
 
 on:
   push:
@@ -14,7 +14,7 @@ jobs:
       fail-fast: false
 
     steps:
-      - name: Checkout repository
+      - name: Checkout code
         uses: actions/checkout@v4
 
       - name: Set up Python 3.12
@@ -46,7 +46,7 @@ jobs:
         id: install-editable
         run: |
           if [ -f "pyproject.toml" ] || [ -f "setup.py" ] || [ -f "setup.cfg" ]; then
-            echo "Found package metadata, attempting pip install -e ."
+            echo "Found packaging metadata, attempting pip install -e ."
             pip install -e . || echo "editable install failed"
             echo "installed_editable=true" >> $GITHUB_OUTPUT
           else
@@ -63,6 +63,10 @@ jobs:
           else
             echo "No src directory; ensure tests import path is correct"
           fi
+
+      - name: Show installed Python packages (top)
+        run: |
+          pip list --format=columns | head -n 60 || true
 
       - name: Run pytest with coverage
         run: |
@@ -85,12 +89,20 @@ jobs:
           name: coverage-xml
           path: coverage.xml
 
-      - name: Job summary
+      - name: Test Summary
         if: always()
         run: |
-          echo "## Test summary" >> $GITHUB_STEP_SUMMARY
+          echo "## Test Results Summary" >> $GITHUB_STEP_SUMMARY
+          echo "" >> $GITHUB_STEP_SUMMARY
+          # show whether coverage dir exists
           if [ -d "htmlcov" ]; then
-            echo "- ✅ HTML coverage report available as artifact 'coverage-report'." >> $GITHUB_STEP_SUMMARY
+            echo "- ✅ Coverage report available as artifact 'coverage-report'." >> $GITHUB_STEP_SUMMARY
           else
-            echo "- ⚠️ No HTML coverage generated." >> $GITHUB_STEP_SUMMARY
+            echo "- ⚠️ Coverage report not generated." >> $GITHUB_STEP_SUMMARY
+          fi
+          # branch-specific note using environment variable (not ${{ }})
+          if [[ "$GITHUB_REF" == "refs/heads/main" ]]; then
+            echo "- This run is on the main branch ($GITHUB_REF)." >> $GITHUB_STEP_SUMMARY
+          else
+            echo "- Branch: $GITHUB_REF" >> $GITHUB_STEP_SUMMARY
           fi
