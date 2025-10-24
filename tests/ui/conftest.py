@@ -16,7 +16,15 @@ def browser():
     """Фикстура для запуска браузера"""
     with sync_playwright() as p:
         # Можно переключить на headless=True для CI/CD
-        browser = p.chromium.launch(headless=False, args=["--start-maximized"])
+        browser = p.chromium.launch(
+            headless=True,  # Всегда headless в CI
+            args=[
+                "--no-sandbox",
+                "--disable-dev-shm-usage",
+                "--disable-gpu",
+                "--window-size=1920,1080"
+            ]
+        )
         yield browser
         browser.close()
 

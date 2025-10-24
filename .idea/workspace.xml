@@ -4,8 +4,8 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5c4584b-287f-4cef-aea7-0ae973b04d66" name="Changes" comment="ci: fix workflow YAML (remove invalid expressions in run)">
-      <change beforePath="$PROJECT_DIR$/.github/workflows/ci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/ci.yml" afterDir="false" />
+    <list default="true" id="f5c4584b-287f-4cef-aea7-0ae973b04d66" name="Changes" comment="Fix CI configuration">
+      <change beforePath="$PROJECT_DIR$/tests/ui/conftest.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/ui/conftest.py" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -371,7 +371,15 @@
       <option name="project" value="LOCAL" />
       <updated>1761308768125</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="Fix CI configuration">
+      <option name="closed" value="true" />
+      <created>1761308964750</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1761308964750</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -390,6 +398,7 @@
     <MESSAGE value="ci: fix workflow YAML for Python 3.12" />
     <MESSAGE value="ci: fixed workflow YAML for GitHub Actions" />
     <MESSAGE value="ci: fix workflow YAML (remove invalid expressions in run)" />
-    <option name="LAST_COMMIT_MESSAGE" value="ci: fix workflow YAML (remove invalid expressions in run)" />
+    <MESSAGE value="Fix CI configuration" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix CI configuration" />
   </component>
 </project>

@@ -50,6 +50,7 @@ jobs:
           python -m pytest tests/ui/tests/ -v --alluredir=reports/allure-results
         env:
           HEADLESS: true
+          PLAYWRIGHT_HEADLESS: true
 
       - name: Install Allure
         run: |
