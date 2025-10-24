@@ -4,7 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5c4584b-287f-4cef-aea7-0ae973b04d66" name="Changes" comment="Исправление ci">
+    <list default="true" id="f5c4584b-287f-4cef-aea7-0ae973b04d66" name="Changes" comment="ci: fix github actions workflow for Python 3.12 + Playwright + Allure">
       <change beforePath="$PROJECT_DIR$/.github/workflows/ci.yml" beforeDir="false" afterPath="$PROJECT_DIR$/.github/workflows/ci.yml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -315,7 +315,23 @@
       <option name="project" value="LOCAL" />
       <updated>1761305742256</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="Исправление ci">
+      <option name="closed" value="true" />
+      <created>1761305821614</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1761305821614</updated>
+    </task>
+    <task id="LOCAL-00015" summary="ci: fix github actions workflow for Python 3.12 + Playwright + Allure">
+      <option name="closed" value="true" />
+      <created>1761306040865</created>
+      <option name="number" value="00015" />
+      <option name="presentableId" value="LOCAL-00015" />
+      <option name="project" value="LOCAL" />
+      <updated>1761306040865</updated>
+    </task>
+    <option name="localTasksCounter" value="16" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -330,6 +346,7 @@
     <MESSAGE value="Улучшена генерация отчетов" />
     <MESSAGE value="Обновлен requirements.txt и добавлен ci" />
     <MESSAGE value="Исправление ci" />
-    <option name="LAST_COMMIT_MESSAGE" value="Исправление ci" />
+    <MESSAGE value="ci: fix github actions workflow for Python 3.12 + Playwright + Allure" />
+    <option name="LAST_COMMIT_MESSAGE" value="ci: fix github actions workflow for Python 3.12 + Playwright + Allure" />
   </component>
 </project>
