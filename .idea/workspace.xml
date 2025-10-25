@@ -4,7 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="f5c4584b-287f-4cef-aea7-0ae973b04d66" name="Changes" comment="Fix CI" />
+    <list default="true" id="f5c4584b-287f-4cef-aea7-0ae973b04d66" name="Changes" comment="Fix test admin page">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -401,7 +403,15 @@
       <option name="project" value="LOCAL" />
       <updated>1761310529174</updated>
     </task>
-    <option name="localTasksCounter" value="25" />
+    <task id="LOCAL-00025" summary="Fix test admin page">
+      <option name="closed" value="true" />
+      <created>1761310992172</created>
+      <option name="number" value="00025" />
+      <option name="presentableId" value="LOCAL-00025" />
+      <option name="project" value="LOCAL" />
+      <updated>1761310992172</updated>
+    </task>
+    <option name="localTasksCounter" value="26" />
     <servers />
   </component>
   <component name="VcsManagerConfiguration">
@@ -423,6 +433,7 @@
     <MESSAGE value="Fix CI configuration" />
     <MESSAGE value="Fix CI + Conftest" />
     <MESSAGE value="Fix CI" />
-    <option name="LAST_COMMIT_MESSAGE" value="Fix CI" />
+    <MESSAGE value="Fix test admin page" />
+    <option name="LAST_COMMIT_MESSAGE" value="Fix test admin page" />
   </component>
 </project>
